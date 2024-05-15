@@ -6,6 +6,13 @@ from omegaconf import DictConfig, OmegaConf
 from rf2aa.chemical import ChemicalData as ChemData
 from icecream import ic
 
+import RFDiffusionAA.metrics as metrics
+import RFDiffusionAA.mask_generator as mask_generator
+import sys
+#https://stackoverflow.com/questions/13398462/unpickling-python-objects-with-a-changed-module-path/13405732
+sys.modules['metrics'] = metrics 
+sys.modules['mask_generator'] = mask_generator 
+
 import rf2aa.chemical
 import rf2aa.util
 from rf2aa.util_module import XYZConverter
@@ -119,8 +126,9 @@ class Sampler:
         """Loads RF checkpoint, from which config can be generated."""
         self._log.info(f'Reading checkpoint from {self.ckpt_path}')
         print(f'loading {self.ckpt_path}')
+
         self.ckpt  = torch.load(
-            self.ckpt_path, map_location=self.device)
+            self.ckpt_path, map_location=self.device,fix_imports=True)
         print(f'loaded {self.ckpt_path}')
 
     def assemble_config_from_chk(self) -> None:

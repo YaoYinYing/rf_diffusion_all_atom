@@ -4,30 +4,33 @@ Code for RFDiffusion AA
   <img src="./img/RFDiffusionAA.png" alt="alt text" width="600px"/>
 </p>
 
-### Setup/Installation
+### Setup/Installation (MacOS, M1 chips)
 1. Clone the package
 ```
-git clone https://github.com/baker-laboratory/rf_diffusion_all_atom.git
+git clone https://github.com/YaoYinYing/rf_diffusion_all_atom.git
 cd rf_diffusion_all_atom
+git switch pip-installable # switch to pip installable branch
 ```
-2. Download the container used to run RFAA.
-```
-wget http://files.ipd.uw.edu/pub/RF-All-Atom/containers/rf_se3_diffusion.sif
-```
-3. Download the model weights.
-```
-wget http://files.ipd.uw.edu/pub/RF-All-Atom/weights/RFDiffusionAA_paper_weights.pt
-```
+2. Download the model weights.
+  ```
+  wget http://files.ipd.uw.edu/pub/RF-All-Atom/weights/RFDiffusionAA_paper_weights.pt
+  ```
+3. use the exact conda env of RF2AA:
+   ```shell
+   conda activate rf2aa # suppose you have created the conda env and installed the RF2AA
+   ```
 
-4. Initialize git submodules
-```
-git submodule init
-git submodule update
-```
-5. Install Apptainer
-
-Install apptainer if you do not already have it on your system.  This will allow you to run our code without installing any python packages using a prepackaged sif: https://apptainer.org/docs/admin/main/installation.html
-
+4. Install the remaining dependencies:
+   ```shell
+   pip3 install torch torchvision torchaudio --force-reinstall 
+   pip install 'libclang>=13.0.0' 'protobuf<3.20,>=3.9.2' 
+   pip install dgl -f https://data.dgl.ai/wheels/repo.html --force-reinstall 
+   pip install -r requirements.txt   
+   ```
+5. Install RFdiffusionAA:
+   ```shell
+   pip install .   
+   ```
 
 ### Inference
 #### Small molecule binder design
@@ -36,16 +39,17 @@ To generate a binder to the ligand OQO from PDB 7v11, run the following:
 
 
 Example (ligand binder):
-```
-/usr/bin/apptainer run --nv rf_se3_diffusion.sif -u run_inference.py inference.deterministic=True diffuser.T=100 inference.output_prefix=output/ligand_only/sample inference.input_pdb=input/7v11.pdb contigmap.contigs=[\'150-150\'] inference.ligand=OQO inference.num_designs=1 inference.design_startnum=0
+```shell
+HYDRA_FULL_ERROR=1  rfdaa_inference inference.ckpt_path=/path/to/weights/RFdiffusionAA/RFDiffusionAA_paper_weights.pt inference.deterministic=True diffuser.T=100 inference.output_prefix=output/ligand_only/sample inference.input_pdb=input/7v11.pdb 'contigmap.contigs=[150-150]' inference.ligand=OQO inference.num_designs=1 inference.design_startnum=0
 ```
 
-Note: The --nv flag must be omitted if not using a GPU.
+
 
 Explanation of arguments:
+- `inference.ckpt_path` specifies the path to the checkpoint file
 - `inference.deterministic=True` seeds the random number generators used so that results are reproducible.  i.e. running with inference.design_startnum=X will produce the same reusults.  Note that torch does not guarantee reproducibility across CPU/GPU architectures: https://pytorch.org/docs/stable/notes/randomness.html
 - `inference.num_designs=1` specifies that 1 design will be generated
-- `contigmap.contigs=[\'150-150\']` specifies that the length of the generated protein should be 150
+- `'contigmap.contigs=[150-150]'` (Please mind the single quotes) specifies that the length of the generated protein should be 150
 - `diffuser.T=100` specifies the number of denoising steps taken.
 
 Expected outputs:
@@ -59,8 +63,9 @@ To include protein residues A430-435 in the motif, use the argument contigmap.co
 
 #### Small molecule binder design with protein motif
 Example (ligand binder with protein motif):
-```
-/usr/bin/apptainer run --nv rf_se3_diffusion.sif -u run_inference.py inference.deterministic=True diffuser.T=200 inference.output_prefix=output/ligand_protein_motif/sample inference.input_pdb=input/1haz.pdb contigmap.contigs=[\'10-120,A84-87,10-120\'] contigmap.length="150-150" inference.ligand=CYC inference.num_designs=1 inference.design_startnum=0
+```shell
+HYDRA_FULL_ERROR=1  rfdaa_inference inference.ckpt_path=/path/to/weights/RFdiffusionAA/RFDiffusionAA_paper_weights.pt inference.deterministic=True diffuser.T=200 inference.output_prefix=output/ligand_protein_motif/sample inference.input_pdb=input/1haz.pdb 'contigmap.contigs=[10-120,A84-87,10-120]' contigmap.length="150-150" inference.ligand=CYC inference.num_designs=1 inference.design_startnum=0
+
 ```
 
 An end-to-end design pipeline illustrating the design of heme-binding proteins using RFdiffusionAA, proteinMPNN, AlphaFold2, LigandMPNN and PyRosetta is available at: https://github.com/ikalvet/heme_binder_diffusion

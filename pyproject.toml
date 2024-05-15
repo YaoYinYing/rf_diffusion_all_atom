@@ -1,0 +1,26 @@
+[build-system]
+requires = ["poetry-core>=1.0.0,<2.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "RFDiffusionAA"
+version = "1.0.0"
+description = "Code for RFDiffusion AA"
+authors = ["Name <email@address>"]
+
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/baker-laboratory/rf_diffusion_all_atom"
+classifiers = [
+    "Topic :: Scientific/Engineering :: Biochemistry",
+    "Topic :: Scientific/Engineering :: Protein Engineering"
+]
+
+packages = [
+    { include = "RFDiffusionAA" },
+    { include = "RFDiffusionAA/*.py" },
+]
+
+[tool.poetry.scripts]
+rfdaa_inference = 'RFDiffusionAA.run_inference:main'
+

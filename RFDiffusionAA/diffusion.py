@@ -8,7 +8,7 @@ from typing import List
 
 from scipy.spatial.transform import Rotation as scipy_R
 from scipy.spatial.transform import Slerp 
-import rotation_conversions
+from RFDiffusionAA import rotation_conversions
 
 from RFDiffusionAA.util import rigid_from_3_points, get_torsions
 

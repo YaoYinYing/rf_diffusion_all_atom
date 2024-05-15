@@ -1,6 +1,6 @@
 import torch
 from icecream import ic
-import potentials.potentials as potentials
+from RFDiffusionAA.potentials import potentials
 import numpy as np 
 
 

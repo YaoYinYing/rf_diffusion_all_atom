@@ -23,7 +23,7 @@ import torch
 from omegaconf import DictConfig, OmegaConf
 import hydra
 import logging
-from util import writepdb_multi, writepdb
+from RFDiffusionAA.util import writepdb_multi, writepdb
 from RFDiffusionAA.inference import utils as iu
 from icecream import ic
 from hydra.core.hydra_config import HydraConfig
@@ -37,7 +37,10 @@ import rf2aa.util
 from RFDiffusionAA import aa_model
 import copy
 
+
 import e3nn.o3 as o3
+
+script_path = os.path.join(os.path.dirname(__file__))
 
 def warm_up_spherical_harmonics():
     ''' o3.spherical_harmonics returns different values on 1st call vs all subsequent calls
@@ -69,7 +72,7 @@ def get_seeds():
         'python': random.getstate(),
     }
 
-@hydra.main(version_base=None, config_path='config/inference', config_name='aa')
+@hydra.main(version_base=None, config_path=os.path.join(script_path,'config','inference'), config_name='aa')
 def main(conf: HydraConfig) -> None:
     sampler = get_sampler(conf)
     sample(sampler)

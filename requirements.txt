@@ -1,3 +1,4 @@
 assertpy
 ipdb
 fire
+pydantic

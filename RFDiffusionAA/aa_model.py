@@ -21,7 +21,7 @@ from rf2aa.data.parsers import parse_mol, parse_pdb
 from RFDiffusionAA import util
 from RFDiffusionAA.inference import utils as iutil
 import networkx as nx
-import pdbio
+from RFDiffusionAA import pdbio
 
 from rf2aa.data.data_loader import get_bond_distances
 from rf2aa.chemical import ChemicalData as ChemData
