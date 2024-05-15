@@ -64,9 +64,9 @@ To include protein residues A430-435 in the motif, use the argument contigmap.co
 #### Small molecule binder design with protein motif
 Example (ligand binder with protein motif):
 ```shell
-HYDRA_FULL_ERROR=1  rfdaa_inference inference.ckpt_path=/path/to/weights/RFdiffusionAA/RFDiffusionAA_paper_weights.pt inference.deterministic=True diffuser.T=200 inference.output_prefix=output/ligand_protein_motif/sample inference.input_pdb=input/1haz.pdb 'contigmap.contigs=[10-120,A84-87,10-120]' contigmap.length="150-150" inference.ligand=CYC inference.num_designs=1 inference.design_startnum=0
-
+HYDRA_FULL_ERROR=1  rfdaa_inference inference.ckpt_path=/path/to/weights/RFdiffusionAA/RFDiffusionAA_paper_weights.pt inference.deterministic=True diffuser.T=200 inference.output_prefix=output/ligand_protein_motif/sample inference.input_pdb=input/1haz.pdb 'contigmap.contigs=[10-120,A84-87,10-120]' inference.ligand=CYC inference.num_designs=1 inference.design_startnum=0
 ```
+* 'contigmap.length="150-150"' is dropped due to error message like `Contig string incompatible with --length range`
 
 An end-to-end design pipeline illustrating the design of heme-binding proteins using RFdiffusionAA, proteinMPNN, AlphaFold2, LigandMPNN and PyRosetta is available at: https://github.com/ikalvet/heme_binder_diffusion
 

@@ -55,7 +55,7 @@ class ContigMap():
             #specifying precise mappings
             self.ref=ref_idx
             self.hal=hal_idx
-            self.rf = rf_idx #?
+            self.rf = idx_rf #? A typo?
         self.mask_1d = [False if i == ('_','_') else True for i in self.ref]
         #take care of sequence and structure masking
         if self.inpaint_seq_tensor is None:
@@ -122,7 +122,9 @@ class ContigMap():
                 length_compatible = True
             count+=1
             if count == 100000: #contig string incompatible with this length
-                sys.exit("Contig string incompatible with --length range")
+                if self.length is not None:
+                    raise ValueError(f"Contig string incompatible with --length range: {sampled_mask_length=} must greater than {self.length[0]=} and smaller than {self.length[1]=}")
+                raise ValueError(f"Contig string incompatible with --length range: {self.length=} {sampled_mask_length=} {count=}")
         return sampled_mask, sampled_mask_length, inpaint_chains
 
     def expand_sampled_mask(self):
