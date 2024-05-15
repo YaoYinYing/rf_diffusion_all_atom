@@ -3,7 +3,7 @@ import glob
 from icecream import ic
 from tqdm import tqdm
 import fire
-import aa_model
+from RFDiffusionAA import aa_model
 import torch
 import rf2aa.util
 

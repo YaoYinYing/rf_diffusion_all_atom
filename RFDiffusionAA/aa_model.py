@@ -14,12 +14,12 @@ import rf2aa.tensor_util
 import torch
 import copy
 import numpy as np
-from kinematics import get_init_xyz
-import chemical
+from RFDiffusionAA.kinematics import get_init_xyz
+from RFDiffusionAA import chemical
 import rf2aa.chemical
 from rf2aa.data.parsers import parse_mol, parse_pdb
-import util
-import inference.utils
+from RFDiffusionAA import util
+from RFDiffusionAA.inference import utils as iutil
 import networkx as nx
 import pdbio
 
@@ -168,7 +168,7 @@ def make_indep(pdb, ligand=None, center=True):
 
     xyz_prot, mask_prot, idx_prot, seq_prot = parse_pdb(pdb, seq=True)
 
-    target_feats = inference.utils.parse_pdb(pdb)
+    target_feats = iutil.parse_pdb(pdb)
     xyz_prot, mask_prot, idx_prot, seq_prot = target_feats['xyz'], target_feats['mask'], target_feats['idx'], target_feats['seq']
     xyz_prot[:,14:] = 0 # remove hydrogens
     mask_prot[:,14:] = False

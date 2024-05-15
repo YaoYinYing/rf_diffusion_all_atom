@@ -10,19 +10,18 @@ import rf2aa.chemical
 import rf2aa.util
 from rf2aa.util_module import XYZConverter
 import rf2aa.tensor_util
-import aa_model
+from RFDiffusionAA import aa_model
 
-from diffusion import Diffuser
-from contigs import ContigMap
-from inference import utils as iu
-from potentials.manager import PotentialManager
+from RFDiffusionAA.diffusion import Diffuser
+from RFDiffusionAA.contigs import ContigMap
+from RFDiffusionAA.inference import utils as iu
+from RFDiffusionAA.potentials.manager import PotentialManager
 import logging
 import util
 from hydra.core.hydra_config import HydraConfig
 from rf2aa.model import RoseTTAFoldModel
 
 import sys
-sys.path.append('../') # to access RF structure prediction stuff 
 
 from rf2aa.model import RoseTTAFoldModel
 

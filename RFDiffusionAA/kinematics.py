@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from icecream import ic
-from chemical import INIT_CRDS
+from RFDiffusionAA.chemical import INIT_CRDS
 
 PARAMS = {
     "DMIN"    : 2.0,

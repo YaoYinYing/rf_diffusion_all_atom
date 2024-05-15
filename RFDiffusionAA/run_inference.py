@@ -24,17 +24,17 @@ from omegaconf import DictConfig, OmegaConf
 import hydra
 import logging
 from util import writepdb_multi, writepdb
-from inference import utils as iu
+from RFDiffusionAA.inference import utils as iu
 from icecream import ic
 from hydra.core.hydra_config import HydraConfig
 import numpy as np
 import random
 import glob
-import inference.model_runners
+import RFDiffusionAA.inference.model_runners
 import rf2aa.tensor_util
-import idealize_backbone
+from RFDiffusionAA import idealize_backbone
 import rf2aa.util
-import aa_model
+from RFDiffusionAA import aa_model
 import copy
 
 import e3nn.o3 as o3

@@ -2,28 +2,28 @@ import numpy as np
 import os
 import sys
 from omegaconf import DictConfig
-from kinematics import xyz_to_t2d
+from RFDiffusionAA.kinematics import xyz_to_t2d
 import torch
 import torch.nn.functional as nn
-from util import get_torsions
-from diffusion import get_beta_schedule, get_chi_betaT
+from RFDiffusionAA.util import get_torsions
+from RFDiffusionAA.diffusion import get_beta_schedule, get_chi_betaT
 from icecream import ic
 from scipy.spatial.transform import Rotation as scipy_R
 from scipy.spatial.transform import Slerp
-from util import torsion_indices as TOR_INDICES
-from util import torsion_can_flip as TOR_CAN_FLIP
-from util import reference_angles as REF_ANGLES
-from util import rigid_from_3_points
-from util_module import ComputeAllAtomCoords
-from potentials.manager import PotentialManager
-import util
+from RFDiffusionAA.util import torsion_indices as TOR_INDICES
+from RFDiffusionAA.util import torsion_can_flip as TOR_CAN_FLIP
+from RFDiffusionAA.util import reference_angles as REF_ANGLES
+from RFDiffusionAA.util import rigid_from_3_points
+from RFDiffusionAA.util_module import ComputeAllAtomCoords
+from RFDiffusionAA.potentials.manager import PotentialManager
+from RFDiffusionAA import util
 import random
 import logging
 import string 
 import hydra
 import rf2aa.chemical
 import rf2aa.tensor_util
-import aa_model
+from RFDiffusionAA import aa_model
 
 ###########################################################
 #### Functions which can be called outside of Denoiser ####

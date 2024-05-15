@@ -10,16 +10,16 @@ from scipy.spatial.transform import Rotation as scipy_R
 from scipy.spatial.transform import Slerp 
 import rotation_conversions
 
-from util import rigid_from_3_points, get_torsions
+from RFDiffusionAA.util import rigid_from_3_points, get_torsions
 
-from util import torsion_indices as TOR_INDICES 
-from util import torsion_can_flip as TOR_CAN_FLIP
-from util import reference_angles as REF_ANGLES
+from RFDiffusionAA.util import torsion_indices as TOR_INDICES 
+from RFDiffusionAA.util import torsion_can_flip as TOR_CAN_FLIP
+from RFDiffusionAA.util import reference_angles as REF_ANGLES
 
-from util_module import ComputeAllAtomCoords
+from RFDiffusionAA.util_module import ComputeAllAtomCoords
 
-from chemical import INIT_CRDS 
-import igso3
+from RFDiffusionAA.chemical import INIT_CRDS 
+from RFDiffusionAA import igso3
 import time 
 
 from icecream import ic  

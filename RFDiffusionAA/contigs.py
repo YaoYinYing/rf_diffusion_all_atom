@@ -55,7 +55,7 @@ class ContigMap():
             #specifying precise mappings
             self.ref=ref_idx
             self.hal=hal_idx
-            self.rf = rf_idx
+            self.rf = rf_idx #?
         self.mask_1d = [False if i == ('_','_') else True for i in self.ref]
         #take care of sequence and structure masking
         if self.inpaint_seq_tensor is None:
