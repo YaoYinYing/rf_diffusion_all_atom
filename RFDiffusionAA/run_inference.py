@@ -30,7 +30,7 @@ from hydra.core.hydra_config import HydraConfig
 import numpy as np
 import random
 import glob
-import RFDiffusionAA.inference.model_runners
+from RFDiffusionAA.inference import model_runners
 import rf2aa.tensor_util
 from RFDiffusionAA import idealize_backbone
 import rf2aa.util
@@ -93,7 +93,7 @@ def get_sampler(conf):
 
     conf.inference.design_startnum = design_startnum
     # Initialize sampler and target/contig.
-    sampler = inference.model_runners.sampler_selector(conf)
+    sampler = model_runners.sampler_selector(conf)
     return sampler
 
 

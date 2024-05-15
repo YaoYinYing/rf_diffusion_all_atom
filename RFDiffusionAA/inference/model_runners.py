@@ -17,7 +17,7 @@ from RFDiffusionAA.contigs import ContigMap
 from RFDiffusionAA.inference import utils as iu
 from RFDiffusionAA.potentials.manager import PotentialManager
 import logging
-import util
+from RFDiffusionAA import util
 from hydra.core.hydra_config import HydraConfig
 from rf2aa.model import RoseTTAFoldModel
 

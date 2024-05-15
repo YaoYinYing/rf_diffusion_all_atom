@@ -5,7 +5,7 @@ import torch
 
 import scipy.sparse
 
-from chemical import *
+from RFDiffusionAA.chemical import *
 
 import rf2aa.kinematics
 import rf2aa.util
