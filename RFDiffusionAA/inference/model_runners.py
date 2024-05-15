@@ -28,9 +28,8 @@ from RFDiffusionAA import util
 from hydra.core.hydra_config import HydraConfig
 from rf2aa.model import RoseTTAFoldModel
 
-import sys
 
-from rf2aa.model import RoseTTAFoldModel
+
 
 TOR_INDICES  = util.torsion_indices
 TOR_CAN_FLIP = util.torsion_can_flip
@@ -50,6 +49,8 @@ class Sampler:
         self._log = logging.getLogger(__name__)
         if torch.cuda.is_available():
             self.device = torch.device('cuda')
+        # elif torch.backends.mps.is_available():
+        #     self.device = torch.device('mps')
         else:
             self.device = torch.device('cpu')
         needs_model_reload = not self.initialized or conf.inference.ckpt_path != self._conf.inference.ckpt_path

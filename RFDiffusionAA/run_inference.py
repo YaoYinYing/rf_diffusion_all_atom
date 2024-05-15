@@ -48,6 +48,8 @@ def warm_up_spherical_harmonics():
     '''
     if torch.cuda.is_available():
         device = torch.device('cuda')
+    # elif torch.backends.mps.is_available():
+    #     device = torch.device('mps')
     else:
         device = torch.device('cpu')
     relative_pos = torch.tensor([[1.,1.,1.], [1.,1.,1.]]).to(device).to(torch.float32)
