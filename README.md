@@ -47,9 +47,9 @@ HYDRA_FULL_ERROR=1  rfdaa_inference inference.ckpt_path=/path/to/weights/RFdiffu
 
 Explanation of arguments:
 - `inference.ckpt_path` specifies the path to the checkpoint file
-- `inference.deterministic=True` seeds the random number generators used so that results are reproducible.  i.e. running with inference.design_startnum=X will produce the same reusults.  Note that torch does not guarantee reproducibility across CPU/GPU architectures: https://pytorch.org/docs/stable/notes/randomness.html
+- `inference.deterministic=True` seeds the random number generators used so that results are reproducible.  i.e. running with inference.design_startnum=X will produce the same results.  Note that torch does not guarantee reproducibility across CPU/GPU architectures: https://pytorch.org/docs/stable/notes/randomness.html
 - `inference.num_designs=1` specifies that 1 design will be generated
-- `'contigmap.contigs=[150-150]'` (Please mind the single quotes) specifies that the length of the generated protein should be 150
+- `'contigmap.contigs=[150-150]'` (Please remind the single quotes) specifies that the length of the generated protein should be 150
 - `diffuser.T=100` specifies the number of denoising steps taken.
 
 Expected outputs:
