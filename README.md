@@ -22,9 +22,7 @@ git switch pip-installable # switch to pip installable branch
 
 4. Install the remaining dependencies:
    ```shell
-   pip3 install torch torchvision torchaudio --force-reinstall 
    pip install 'libclang>=13.0.0' 'protobuf<3.20,>=3.9.2' 
-   pip install dgl -f https://data.dgl.ai/wheels/repo.html --force-reinstall 
    pip install -r requirements.txt   
    ```
 5. Install RFdiffusionAA:
